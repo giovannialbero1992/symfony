@@ -7,9 +7,9 @@
 
     <framework:config>
         <framework:messenger>
-            <framework:transport name="transport_1" dsn="null://" failure_transport="failure_transport_1" />
+            <framework:transport name="transport_1" dsn="null://" failure-transport="failure_transport_1" />
             <framework:transport name="transport_2" dsn="null://" />
-            <framework:transport name="transport_3" dsn="null://" failure_transport="failure_transport_3" />
+            <framework:transport name="transport_3" dsn="null://" failure-transport="failure_transport_3" />
             <framework:transport name="failure_transport_1" dsn="null://" />
             <framework:transport name="failure_transport_3" dsn="null://" />
         </framework:messenger>
