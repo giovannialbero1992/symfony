@@ -47,7 +47,7 @@ abstract class AbstractFailedMessagesCommand extends Command
 
     protected function getReceiverName(?string $name): string
     {
-        if ($name === null) {
+        if (null === $name) {
             return $this->receiverName;
         }
 
@@ -127,7 +127,7 @@ abstract class AbstractFailedMessagesCommand extends Command
 
     protected function getReceiver(?string $name): ReceiverInterface
     {
-        if ($name === null) {
+        if (null === $name) {
             return $this->receiver;
         }
 

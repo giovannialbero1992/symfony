@@ -27,7 +27,8 @@ use Symfony\Component\Messenger\Transport\Receiver\ReceiverInterface;
  */
 class FailedMessagesShowCommandTest extends TestCase
 {
-    public function testFailedServiceLocator() {
+    public function testFailedServiceLocator()
+    {
         $sentToFailureStamp = new SentToFailureTransportStamp('async');
         $redeliveryStamp = new RedeliveryStamp(0, 'Things are bad!');
         $envelope = new Envelope(new \stdClass(), [
@@ -35,7 +36,7 @@ class FailedMessagesShowCommandTest extends TestCase
             $sentToFailureStamp,
             $redeliveryStamp,
         ]);
-        
+
         $receiverName = 'failure_receiver';
         $receiver = $this->createMock(ListableReceiverInterface::class);
         $receiver->expects($this->once())->method('find')->with(15)->willReturn($envelope);
@@ -46,7 +47,6 @@ class FailedMessagesShowCommandTest extends TestCase
             null,
             null,
             $serviceLocator
-
         );
 
         $tester = new CommandTester($command);
@@ -65,7 +65,7 @@ EOF
             $redeliveryStamp->getRedeliveredAt()->format('Y-m-d H:i:s')),
             $tester->getDisplay(true));
     }
-    
+
     public function testBasicRun()
     {
         $sentToFailureStamp = new SentToFailureTransportStamp('async');
@@ -83,7 +83,6 @@ EOF
             'failure_receiver',
             $receiver,
             $serviceLocator
-            
         );
 
         $tester = new CommandTester($command);
@@ -170,7 +169,7 @@ EOF
         $receiver = $this->createMock(ListableReceiverInterface::class);
         $receiver->expects($this->once())->method('all')->with()->willReturn([$envelope]);
         $serviceLocator = $this->createMock(ServiceLocator::class);
-        
+
         $command = new FailedMessagesShowCommand(
             'failure_receiver',
             $receiver,
@@ -196,7 +195,7 @@ EOF
         $command = new FailedMessagesShowCommand(
             'failure_receiver',
             $receiver,
-            $serviceLocator            
+            $serviceLocator
         );
 
         $tester = new CommandTester($command);
@@ -215,7 +214,7 @@ EOF
         $receiver = $this->createMock(ListableReceiverInterface::class);
         $receiver->expects($this->once())->method('all')->with()->willReturn([$envelope]);
         $serviceLocator = $this->createMock(ServiceLocator::class);
-        
+
         $command = new FailedMessagesShowCommand(
             'failure_receiver',
             $receiver,
@@ -236,7 +235,7 @@ EOF
         ]);
         $receiver = $this->createMock(ListableReceiverInterface::class);
         $serviceLocator = $this->createMock(ServiceLocator::class);
-        
+
         $command = new FailedMessagesShowCommand(
             'failure_receiver',
             $receiver,

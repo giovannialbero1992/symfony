@@ -60,7 +60,7 @@ class FailedMessagesRetryCommand extends AbstractFailedMessagesCommand
             ->setDefinition([
                 new InputArgument('id', InputArgument::IS_ARRAY, 'Specific message id(s) to retry'),
                 new InputOption('force', null, InputOption::VALUE_NONE, 'Force action without confirmation'),
-                new InputOption('failed-transport', null, InputOption::VALUE_OPTIONAL, 'Use a specific failed transport')
+                new InputOption('failed-transport', null, InputOption::VALUE_OPTIONAL, 'Use a specific failed transport'),
             ])
             ->setDescription('Retries one or more messages from the failure transport')
             ->setHelp(<<<'EOF'
@@ -200,7 +200,7 @@ EOF
 
     private function retrySpecificIds(?string $failedTransport, array $ids, SymfonyStyle $io, bool $shouldForce)
     {
-         $receiver = $this->getReceiver($failedTransport);
+        $receiver = $this->getReceiver($failedTransport);
 
         if (!$receiver instanceof ListableReceiverInterface) {
             throw new RuntimeException(sprintf('The "%s" receiver does not support retrying messages by id.', $this->getReceiverName($failedTransport)));

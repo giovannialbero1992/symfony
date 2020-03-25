@@ -1862,8 +1862,7 @@ class FrameworkExtension extends Extension
             $container->getDefinition('console.command.messenger_failed_messages_remove')
                 ->replaceArgument(0, $config['failure_transport'] ?? null)
                 ->replaceArgument(1, $failureTransportsByName[$config['failure_transport']] ?? null)
-                ->replaceArgument(2, $container->getDefinition($failureTransportsByNameServiceLocatorId));;
-
+                ->replaceArgument(2, $container->getDefinition($failureTransportsByNameServiceLocatorId));
         } else {
             $container->removeDefinition('console.command.messenger_failed_messages_retry');
             $container->removeDefinition('console.command.messenger_failed_messages_show');

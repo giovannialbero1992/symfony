@@ -17,11 +17,11 @@ use Symfony\Component\DependencyInjection\ServiceLocator;
 use Symfony\Component\Messenger\Command\FailedMessagesRemoveCommand;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Transport\Receiver\ListableReceiverInterface;
-use Symfony\Contracts\Service\ServiceProviderInterface;
 
 class FailedMessagesRemoveCommandTest extends TestCase
 {
-    public function testRemoveUniqueMessageSpecificFailedTransport() {
+    public function testRemoveUniqueMessageSpecificFailedTransport()
+    {
         $messageId = 20;
         $anotherFailedTransport = 'another_failure_receiver';
 
@@ -37,7 +37,7 @@ class FailedMessagesRemoveCommandTest extends TestCase
         );
 
         $tester = new CommandTester($command);
-        $tester->execute(['id' => [$messageId], '--failed-transport' => $anotherFailedTransport,'--force' => true]);
+        $tester->execute(['id' => [$messageId], '--failed-transport' => $anotherFailedTransport, '--force' => true]);
 
         $this->assertStringContainsString('Failed Message Details', $tester->getDisplay());
         $this->assertStringContainsString('Message with id 20 removed.', $tester->getDisplay());

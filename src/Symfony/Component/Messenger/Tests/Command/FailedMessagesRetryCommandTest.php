@@ -35,7 +35,7 @@ class FailedMessagesRetryCommandTest extends TestCase
         // the bus should be called in the worker
         $bus->expects($this->exactly(2))->method('dispatch')->willReturn(new Envelope(new \stdClass()));
         $serviceLocator = $this->createMock(ServiceLocator::class);
-        
+
         $command = new FailedMessagesRetryCommand(
             'failure_receiver',
             $receiver,
@@ -65,7 +65,7 @@ class FailedMessagesRetryCommandTest extends TestCase
         $failedTransportName = 'failure_receiver';
         $serviceLocator = $this->createMock(ServiceLocator::class);
         $serviceLocator->method('get')->with($failedTransportName)->willReturn($receiver);
-        
+
         $command = new FailedMessagesRetryCommand(
             null,
             null,
@@ -74,9 +74,9 @@ class FailedMessagesRetryCommandTest extends TestCase
             new NullLogger(),
             $serviceLocator
         );
-        
+
         $tester = new CommandTester($command);
-        $tester->execute(['id' => [10, 12], '--failed-transport' => $failedTransportName,'--force' => true]);
+        $tester->execute(['id' => [10, 12], '--failed-transport' => $failedTransportName, '--force' => true]);
 
         $this->assertStringContainsString('[OK]', $tester->getDisplay());
     }
