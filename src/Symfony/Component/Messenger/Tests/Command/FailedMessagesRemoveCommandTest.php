@@ -47,10 +47,12 @@ class FailedMessagesRemoveCommandTest extends TestCase
     {
         $receiver = $this->createMock(ListableReceiverInterface::class);
         $receiver->expects($this->once())->method('find')->with(20)->willReturn(new Envelope(new \stdClass()));
+        $serviceLocator = $this->createMock(ServiceLocator::class);
 
         $command = new FailedMessagesRemoveCommand(
             'failure_receiver',
-            $receiver
+            $receiver,
+            $serviceLocator
         );
 
         $tester = new CommandTester($command);
